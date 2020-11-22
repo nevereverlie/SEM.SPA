@@ -1,0 +1,43 @@
+.dropdown-toggle, .dropdown-item {
+  cursor: pointer;
+}
+
+.nav-title {
+  font-family: 'Raleway', sans-serif;
+  font-size: xx-large;
+}
+.nav-link {
+  font-family: 'Raleway', sans-serif;
+  font-size: large;
+}
+
+.container {
+  display: contents;
+}
+
+.col, .column{
+  background-color: gray;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 800px;
+  max-width: 500px;
+  text-align: center;
+  border-width: 5px !important;
+  font-family: 'Raleway', sans-serif;
+}
+
+.ref {
+  margin-top: 125px;
+  font-size: 16px;
+  max-width: 180px;
+  width: 180px;
+  text-align: center;
+  word-wrap: none;
+  border-radius: 10px;
+}
+
+.greeting {
+  font-size: x-large;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+}

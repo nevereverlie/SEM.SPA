@@ -1,0 +1,80 @@
+<!--NAVBAR-->
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+  <div class="container">
+    <img style="width: 100px;" src="https://res.cloudinary.com/nevereverlie/image/upload/v1606056028/Revisory%20Control/MainLogo_h42znk.png">
+    <a class="navbar-brand ml-3 nav-title" [routerLink]="['']" style="cursor: pointer;">Revisory Control</a>
+    <ul class="navbar-nav mr-auto">
+      <li
+        *ngIf="!this.authService.loggedIn()"
+        class="nav-item"
+        routerLinkActive="active"
+        style="cursor: pointer;"
+      >
+        <a class="nav-link" (click)="registerToggle(); openModalWithComponent()">Реєстрація</a>
+      </li>
+    </ul>
+
+    <div *ngIf="this.authService.loggedIn()" class="dropdown" ngbDropdown>
+      <a class="dropdown-toggle text-light greeting" ngbDropdownToggle>
+        Привіт,
+        {{
+          authService.decodedToken?.email | titlecase
+        }}
+      </a>
+      <div class="dropdown-menu mt-3" ngbDropdownMenu>
+        <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active" ngbDropdownItem ><i class="fa fa-user"></i>Профіль</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" ngbDropdownItem (click)="logout()"
+          ><i class="fa fa-sign-out"></i>Вийти</a
+        >
+      </div>
+    </div>
+
+    <form
+      *ngIf="!this.authService.loggedIn()"
+      #loginForm="ngForm"
+      class="form-inline my-2 my-lg-0 mw-100"
+      (ngSubmit)="login()"
+    >
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        name="email"
+        placeholder="Email"
+        required
+        [(ngModel)]="model.email"
+      />
+      <input
+        class="form-control mr-sm-2"
+        type="password"
+        name="password"
+        placeholder="Password"
+        required
+        [(ngModel)]="model.password"
+      />
+      <button
+        [disabled]="!loginForm.valid"
+        class="btn btn-success my-2 my-sm-0"
+        type="submit"
+      >
+        Увійти
+      </button>
+      <button
+        class="btn btn-outline-dark my-2 my-sm-0 ml-sm-2"
+        type="button"
+      >
+        <i class="fa fa-google" style="font-size: 2em;"></i>
+      </button>
+    </form>
+  </div>
+</nav>
+<!--REGISTRATION FORM-->
+<div *ngIf="registerMode" style="margin: auto; margin-top: 3em;">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <app-register
+        (cancelRegistration)="cancelRegistrationMode($event)"
+      ></app-register>
+    </div>
+  </div>
+</div>
