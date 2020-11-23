@@ -4,7 +4,7 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
-
+import {MatSelectModule} from '@angular/material/select';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,10 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AlertifyService } from './_services/alertify.service';
 import { AuthService } from './_services/auth.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileComponent } from './profile/profile.component';
+import { UserService } from './_services/user.service';
+import { DepartmentService } from './_services/department.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -29,7 +33,8 @@ export function tokenGetter() {
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
    ],
   imports: [
     BrowserModule,
@@ -47,12 +52,16 @@ export function tokenGetter() {
       },
     }),
     SelectDropDownModule,
-    NgbModule
+    NgbModule,
+    MatSelectModule,
+    FontAwesomeModule
   ],
   providers: [
     AlertifyService,
     AuthService,
-    BsModalService
+    BsModalService,
+    UserService,
+    DepartmentService
   ],
   bootstrap: [AppComponent]
 })

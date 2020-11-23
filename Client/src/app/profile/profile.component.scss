@@ -1,3 +1,7 @@
+* {
+  font-family: 'Raleway', 'sans-serif';
+}
+
 .dropdown-toggle, .dropdown-item {
   cursor: pointer;
 }
@@ -19,38 +23,21 @@
   text-align: center;
   border-width: 5px !important;
   font-family: 'Raleway', sans-serif;
-  background-position: center;
 }
 
 .column-content {
   margin-top: 200px;
 }
-.title, .description {
-  color: whitesmoke;
-}
-.description {
-  font-size: 18px;
-  font-weight: 800;
-  text-shadow: 0 0 5px #000000;
-}
-
-
-.chat {
-  font-size: 32px;
-  text-shadow: 0 0 10px #FF0000;
-}
-.films {
-  font-size: 32px;
-  text-shadow: 0 0 10px #1AFF4E;
-}
-.marketplace {
-  font-size: 32px;
-  text-shadow: 0 0 10px #00F9FF;
+.title {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
 }
 
 .ref {
   margin-top: 125px;
-  font-size: 16px;
+  font-size: large;
   max-width: 180px;
   width: 180px;
   text-align: center;
@@ -58,8 +45,37 @@
   border-radius: 10px;
 }
 
+.profileForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+  max-width: 500px;
+}
+
+.profileBtn {
+  display: block;
+  margin: auto;
+  margin-bottom: 1rem;
+}
 
 
 footer {
   font-family: 'Raleway', sans-serif;
 }
+
+.user__input {
+  width: 500px;
+  display: block;
+}
+.user__label {
+  display: block;
+}
+
+.form-group {
+  max-width: 100%;
+  width: 100%;
+}
+

@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
   login() {
     this.authService.login(this.model).subscribe(next => {
       this.alertify.success('Вхід успішний!');
+      console.log(this.authService.decodedToken);
     }, e => {
       this.alertify.error(e.error);
     });

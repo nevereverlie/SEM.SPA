@@ -1,3 +1,47 @@
-<p>
-  home works!
-</p>
+<!--CONTENT-->
+<div class="row" style="margin: 0; display: flex; justify-content: space-between; max-width: 100%;">
+  <div class="col-4 column border border-dark" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/nevereverlie/image/upload/v1606134735/Revisory%20Control/Productivity_hru3sc.jpg)'}">
+    <div class="column-content">
+      <h3 class="title mb-5 marketplace">
+        Продуктивність
+      </h3>
+      <p class="description" style="color: #999999;">
+        Підвищіть ефективність роботи ваших співробітників та відділів у рази
+      <p>
+    </div>
+    <button class="btn btn-lg btn-dark ref" [routerLink]="['/shop/categories']" routerLinkActive="router-link-active" >Explore</button>
+  </div>
+  <div class="col-4 column border border-dark" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/nevereverlie/image/upload/v1606134263/Revisory%20Control/Control_jftalu.jpg)'}">
+    <div class="column-content">
+      <h3 class="title mb-5 films">
+        Контроль
+      </h3>
+      <p class="description" style="color: #999999;">
+        Будьте в курсі всіх подій на робочому місці де б ви не були
+      </p>
+    </div>
+    <button class="btn btn-lg btn-dark ref" [routerLink]="['/films']" routerLinkActive="router-link-active" >Watch</button>
+  </div>
+  <div class="col-4 column border border-dark" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/nevereverlie/image/upload/v1606134635/Revisory%20Control/Success_vurww5.jpg)'}">
+    <div class="column-content">
+      <h3 class="title mb-5 chat">
+        Впевненість
+      </h3>
+      <p class="description" style="color: #999999;">
+        Будьте впевненими у своїх співробітниках та робочих планах проектів
+      </p>
+    </div>
+    <button class="btn btn-lg btn-dark ref" [routerLink]="['/chat']" routerLinkActive="router-link-active" >Communicate</button>
+  </div>
+</div>
+<!--FOOTER-->
+<footer>
+  <footer class="page-footer font-small blue">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3" style="color: honeydew;  background-color: #1a1a1a;">© 2020 Copyright:
+      <a href="https://swmedia.azurewebsites.net"> Revisory Control</a>
+    </div>
+
+  </footer>
+</footer>
