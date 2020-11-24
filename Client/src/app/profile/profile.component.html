@@ -1,118 +1,145 @@
-<!-- Profile form -->
-<form
-  #profileForm="ngForm"
-  (ngSubmit)="updateProfile(user)"
-  class="needs-validation profileForm mt-5"
-  novalidate
->
-  <h2 class="mt-3 title">
-    Profile
-    <fa-icon
-      [icon]="faEdit"
-      style="cursor: pointer; padding-left: 1rem"
-      (click)="changeEditMode(!editMode)"
-    ></fa-icon>
-  </h2>
-
-  <div class="form-group">
-    <label for="firstname">Ім'я: </label>
-    <label id="firstname" class="user__label" *ngIf="!editMode">{{
-      user?.firstname
-    }}</label>
-    <input
-      type="text"
-      class="form-control user__input"
-      id="firstname"
-      name="firstname"
-      [(ngModel)]="user.firstname"
-      *ngIf="editMode"
-      value="{{ user?.firstname }}"
-    />
-  </div>
-
-  <div class="form-group">
-    <label for="lastname">Прізвище: </label>
-    <label id="lastname" class="user__label" *ngIf="!editMode">{{
-      user?.lastname
-    }}</label>
-    <input
-      type="text"
-      class="form-control user__input"
-      id="lastname"
-      *ngIf="editMode"
-      name="lastname"
-      [(ngModel)]="user.lastname"
-      value="{{ user?.lastname }}"
-    />
-  </div>
-
-  <div class="form-group">
-    <label for="email">E-mail: </label>
-    <label id="email" class="user__label" *ngIf="!editMode">{{
-      user?.userEmail
-    }}</label>
-    <input
-      type="email"
-      class="form-control user__input"
-      id="email"
-      *ngIf="editMode"
-      name="email"
-      [(ngModel)]="user.userEmail"
-      value="{{ user?.userEmail }}"
-    />
-  </div>
-
-  <!--<div class="form-group">
-    <label for="password">Пароль: </label>
-    <label id="password" class="user__label" *ngIf="!editMode">
-      ********
-    </label>
-    <input
-      type="password"
-      class="form-control user__input"
-      id="password"
-      *ngIf="editMode"
-      name="password"
-      [(ngModel)]="user.userPassword"
-    />
-  </div>-->
-
-  <div class="form-group">
-    <label for="department">Відділ: </label>
-    <mat-label id="department" class="user__label" *ngIf="!editMode">{{
-      user?.department?.departmentName || user.department
-    }}</mat-label>
-    <mat-select
-      class="form-control user__input"
-      *ngIf="editMode"
-      [(ngModel)]="user.department"
-      name="department"
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Профіль">
+    <!-- Profile form -->
+    <form
+      #profileForm="ngForm"
+      (ngSubmit)="updateProfile(user)"
+      class="needs-validation profileForm mt-5"
+      novalidate
     >
-      <mat-option
-        *ngFor="let department of departments"
-        [value]="department?.departmentName"
+      <h2 class="mt-3 title">
+        Ваш профіль
+        <fa-icon
+          [icon]="faEdit"
+          style="cursor: pointer; padding-left: 1rem"
+          (click)="changeEditMode(!editMode)"
+        ></fa-icon>
+      </h2>
+
+      <div class="form-group">
+        <label for="firstname">Ім'я: </label>
+        <label id="firstname" class="user__label" *ngIf="!editMode">{{
+          user?.firstname
+        }}</label>
+        <input
+          type="text"
+          class="form-control user__input"
+          id="firstname"
+          name="firstname"
+          [(ngModel)]="user.firstname"
+          *ngIf="editMode"
+          value="{{ user?.firstname }}"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lastname">Прізвище: </label>
+        <label id="lastname" class="user__label" *ngIf="!editMode">{{
+          user?.lastname
+        }}</label>
+        <input
+          type="text"
+          class="form-control user__input"
+          id="lastname"
+          *ngIf="editMode"
+          name="lastname"
+          [(ngModel)]="user.lastname"
+          value="{{ user?.lastname }}"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail: </label>
+        <label id="email" class="user__label" *ngIf="!editMode">{{
+          user?.userEmail
+        }}</label>
+        <input
+          type="email"
+          class="form-control user__input"
+          id="email"
+          *ngIf="editMode"
+          name="email"
+          [(ngModel)]="user.userEmail"
+          value="{{ user?.userEmail }}"
+        />
+      </div>
+
+      <!--<div class="form-group">
+        <label for="password">Пароль: </label>
+        <label id="password" class="user__label" *ngIf="!editMode">
+          ********
+        </label>
+        <input
+          type="password"
+          class="form-control user__input"
+          id="password"
+          *ngIf="editMode"
+          name="password"
+          [(ngModel)]="user.userPassword"
+        />
+      </div>-->
+
+      <div class="form-group">
+        <label for="department">Відділ: </label>
+        <mat-label id="department" class="user__label" *ngIf="!editMode">{{
+          user?.department?.departmentName || user.department
+        }}</mat-label>
+        <mat-select
+          class="form-control user__input"
+          *ngIf="editMode"
+          [(ngModel)]="user.department"
+          name="department"
+        >
+          <mat-option
+            *ngFor="let department of departments"
+            [value]="department?.departmentName"
+          >
+            {{ department?.departmentName }}
+          </mat-option>
+        </mat-select>
+      </div>
+
+      <div class="form-group text-center">
+        <button
+          *ngIf="editMode"
+          class="btn btn-success profileBtn"
+          type="submit"
+          (click)="updateProfile(user)"
+        >
+          Зберегти
+        </button>
+        <button
+          *ngIf="editMode"
+          class="btn btn-secondary"
+          type="button"
+          (click)="changeEditMode(false)"
+        >
+          Відмінити
+        </button>
+      </div>
+    </form>
+  </mat-tab>
+  <mat-tab label="Співробітники">
+    <!-- Employees list -->
+    <mat-selection-list #employees [multiple]="false">
+      <mat-list-option
+        class="list-option"
+        *ngFor="let employee of employeesList"
+        [value]="employee"
+        (click)="selectEmployee(employee); drawChart(employee)"
       >
-        {{ department?.departmentName }}
-      </mat-option>
-    </mat-select>
-  </div>
-
-  <div class="form-group text-center">
-    <button
-      *ngIf="editMode"
-      class="btn btn-success profileBtn"
-      type="submit"
-      (click)="updateProfile(user)"
-    >
-      Save changes
-    </button>
-    <button
-      *ngIf="editMode"
-      class="btn btn-secondary"
-      type="button"
-      (click)="changeEditMode(false)"
-    >
-      Cancel
-    </button>
-  </div>
-</form>
+        <span style="font-weight: 600"
+          >{{ employee.firstname }} {{ employee.lastname }}</span
+        >
+        E-mail: {{ employee.userEmail }} <br />
+        Відділ: {{ employee.department.departmentName }} <br />
+      </mat-list-option>
+    </mat-selection-list>
+    <!-- Graphics -->
+    <div
+      id="chartContainer"
+      class="chartContainer"
+    ></div>
+  </mat-tab>
+  <mat-tab label="Панель адміністратора"> Content 3 </mat-tab>
+</mat-tab-group>

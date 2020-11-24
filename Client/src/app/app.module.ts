@@ -5,6 +5,10 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatListModule} from '@angular/material/list';
+
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -54,7 +58,9 @@ export function tokenGetter() {
     SelectDropDownModule,
     NgbModule,
     MatSelectModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatTabsModule,
+    MatListModule
   ],
   providers: [
     AlertifyService,
