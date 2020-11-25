@@ -102,6 +102,18 @@ footer {
   margin-right: auto;
   margin-top: 2rem;
 }
+.canvasjs-chart-credit {
+  display: none;
+}
+
+.userIcon {
+  vertical-align: top;
+  margin-right: 1rem;
+}
+.employeeInfo {
+  display: inline-block;
+}
+
 
 .mat-tab-body-content {
   overflow: hidden !important;
@@ -155,6 +167,7 @@ input:disabled {
 .row {
   justify-content: space-evenly;
   margin-bottom: 2rem;
+  margin-top: 1.5rem;
 }
 
 .dark-modal .modal-content {

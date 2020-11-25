@@ -128,40 +128,90 @@
         [value]="employee"
         (click)="selectEmployee(employee); drawChart(employee)"
       >
-        <span style="font-weight: 600"
-          >{{ employee.firstname }} {{ employee.lastname }}</span
-        >
-        E-mail: {{ employee.userEmail }} <br />
-        Відділ: {{ employee.department.departmentName }} <br />
+        <div id="{{ employee.lastname }}" *ngIf="employee.lastname != 'admin'">
+          <fa-icon [icon]="faUser" size="3x" class="userIcon"></fa-icon>
+          <div class="employeeInfo">
+            <span style="font-weight: 600"
+              >{{ employee.firstname }} {{ employee.lastname }}</span
+            >
+            <br />
+            <span>E-mail: {{ employee.userEmail }} </span
+            ><br />
+            <span *ngIf="employee.department != null"
+              >Відділ: {{ employee.department.departmentName }} </span
+            ><br />
+            <span *ngIf="employee.department == null"
+              >Відділ: не закріплений</span
+            ><br />
+          </div>
+        </div>
       </mat-list-option>
     </mat-selection-list>
     <!-- Graphics -->
-    <div
-      id="chartContainer"
-      class="chartContainer"
-    ></div>
+    <div id="chartContainer" class="chartContainer"></div>
   </mat-tab>
-  <mat-tab label="Панель адміністратора" style="overflow: hidden">
+  <mat-tab
+    *ngIf="this.user.firstname == 'admin'"
+    label="Панель адміністратора"
+    style="overflow: hidden"
+  >
     <table class="table admin-table table-striped">
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Відділ
-            <div class="lockIcon"><fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
-            <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon></div>
+          <th scope="col">
+            Відділ
+            <div class="lockIcon">
+              <fa-icon
+                [icon]="faLock"
+                *ngIf="!updateMode"
+                aria-hidden="true"
+                style="padding-left: 1rem"
+              ></fa-icon>
+              <fa-icon
+                [icon]="faUnlock"
+                *ngIf="updateMode"
+                aria-hidden="true"
+                style="padding-left: 1rem"
+              ></fa-icon>
+            </div>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let department of departments">
-          <th scope="row">{{department.departmentId}}</th>
-          <td style="width: 100%;">
+          <th scope="row">{{ department.departmentId }}</th>
+          <td style="width: 100%">
             <div class="form-group">
-              <div *ngIf="!updateMode; then viewMode else updatingMode"></div>
-                <ng-template #viewMode><input name="depInput" placeholder="{{department.departmentName}}" disabled>
-                  <div class="timesIcon"><fa-icon [icon]="faTimes" style="font-size:36px;color:red;cursor: pointer;" (click)="deleteDepartmentConfirmation(department.departmentId)"></fa-icon></div></ng-template>
-                <ng-template #updatingMode><input class="departmentNameInput updateInput" name="depInput" placeholder="{{department.departmentName}}">
-                  <div class="timesIcon"><fa-icon [icon]="faTimes" style="font-size:36px;color:red;cursor: pointer;" (click)="deleteDepartmentConfirmation(department.departmentId)"></fa-icon></div></ng-template>
+              <div *ngIf="!updateMode; then viewMode; else updatingMode"></div>
+              <ng-template #viewMode
+                ><input
+                  name="depInput"
+                  placeholder="{{ department.departmentName }}"
+                  disabled />
+                <div class="timesIcon">
+                  <fa-icon
+                    [icon]="faTimes"
+                    style="font-size: 36px; color: red; cursor: pointer"
+                    (click)="
+                      deleteDepartmentConfirmation(department.departmentId)
+                    "
+                  ></fa-icon></div
+              ></ng-template>
+              <ng-template #updatingMode
+                ><input
+                  class="departmentNameInput updateInput"
+                  name="depInput"
+                  placeholder="{{ department.departmentName }}" />
+                <div class="timesIcon">
+                  <fa-icon
+                    [icon]="faTimes"
+                    style="font-size: 36px; color: red; cursor: pointer"
+                    (click)="
+                      deleteDepartmentConfirmation(department.departmentId)
+                    "
+                  ></fa-icon></div
+              ></ng-template>
             </div>
           </td>
         </tr>
@@ -169,24 +219,59 @@
     </table>
     <div class="container">
       <div class="row">
-        <button type="button" class="btn btn-outline-success btn-lg" (click)="openVerticallyCentered(content)">Створити</button>
+        <button
+          type="button"
+          class="btn btn-outline-success btn-lg"
+          (click)="openVerticallyCentered(content)"
+        >
+          Створити
+        </button>
         <ng-template #content let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Створення відділу</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <label>Введіть назву нового відділу: </label>
-            <input style="margin-left: 1rem; width: auto;" [(ngModel)]="departmentForCreation.departmentName">
+            <input
+              style="margin-left: 1rem; width: auto"
+              [(ngModel)]="departmentForCreation.departmentName"
+            />
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-            <button type="button" class="btn btn-success" (click)="createDepartment(departmentForCreation); modal.close('Ok click')">Створити</button>
+            <button
+              type="button"
+              class="btn btn-light"
+              (click)="modal.close('Close click')"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="
+                createDepartment(departmentForCreation); modal.close('Ok click')
+              "
+            >
+              Створити
+            </button>
           </div>
         </ng-template>
-        <button type="button" class="btn btn-outline-primary btn-lg" id="BtnUpdate" (click)="changeUpdateMode(); !updateMode ? updateDepartments() : ''">{{updateMode ? 'Зберегти зміни' : 'Змінити'}}</button>
+        <button
+          type="button"
+          class="btn btn-outline-primary btn-lg"
+          id="BtnUpdate"
+          (click)="changeUpdateMode(); !updateMode ? updateDepartments() : ''"
+        >
+          {{ updateMode ? "Зберегти зміни" : "Змінити" }}
+        </button>
         <div *ngIf="updating" class="spinner-overlay">
           <div class="spinner-center">
             <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
