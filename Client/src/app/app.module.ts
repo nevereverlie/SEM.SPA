@@ -7,6 +7,8 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 
@@ -60,7 +62,8 @@ export function tokenGetter() {
     MatSelectModule,
     FontAwesomeModule,
     MatTabsModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     AlertifyService,
