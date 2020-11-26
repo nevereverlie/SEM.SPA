@@ -16,10 +16,7 @@
 
     <div *ngIf="this.authService.loggedIn()" class="dropdown" ngbDropdown>
       <a class="dropdown-toggle text-light greeting" ngbDropdownToggle>
-        Привіт,
-        {{
-          authService.decodedToken?.email | titlecase
-        }}
+        Привіт, {{ this?.user?.firstname | titlecase }}
       </a>
       <div class="dropdown-menu mt-3" ngbDropdownMenu>
         <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active" ngbDropdownItem ><i class="fa fa-user"></i>Профіль</a>

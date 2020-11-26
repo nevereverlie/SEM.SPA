@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Form } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { User } from '../profile/profile.component';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +24,15 @@ export class UserService {
     return this.http.get(this.baseUrl + 'byEmail/' + email);
   }
 
-  updateUser(userToUpdate: any): any {
+  updateUser(userToUpdate: FormData): any {
     return this.http.put(this.baseUrl + 'update', userToUpdate);
   }
 
+  updateProfile(profileToUpdate: any): any {
+    return this.http.put(this.baseUrl + 'updateProfile', profileToUpdate);
+  }
+
   deleteUser(userId: number): any {
-    return this.http.delete(this.baseUrl + 'delete' + userId);
+    return this.http.delete(this.baseUrl + 'delete/' + userId);
   }
 }
