@@ -1,32 +1,32 @@
 <!--CONTENT-->
-<div class="row" style="margin: 0; display: flex; justify-content: space-between; max-width: 100%;">
+<div class="row content">
   <div class="col-4 column border border-dark" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/nevereverlie/image/upload/v1606134735/Revisory%20Control/Productivity_hru3sc.jpg)'}">
     <div class="column-content">
       <h3 class="title mb-5 marketplace">
-        Продуктивність
+        {{ 'HOME_PRODUCTIVITY_COLUMN' | translate }}
       </h3>
       <p class="description" style="color: #ffffff;">
-        Підвищіть ефективність роботи ваших співробітників та відділів у рази
+        {{ 'HOME_PRODUCTIVITY_DESCRIPTION' | translate }}
       <p>
     </div>
   </div>
   <div class="col-4 column border border-dark" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/nevereverlie/image/upload/v1606134263/Revisory%20Control/Control_jftalu.jpg)'}">
     <div class="column-content">
       <h3 class="title mb-5 films">
-        Контроль
+        {{ 'HOME_CONTROL_COLUMN' | translate }}
       </h3>
       <p class="description" style="color: #ffffff;">
-        Будьте в курсі всіх подій на робочому місці де б ви не були
+        {{ 'HOME_CONTROL_DESCRIPTION' | translate }}
       </p>
     </div>
   </div>
   <div class="col-4 column border border-dark" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/nevereverlie/image/upload/v1606134635/Revisory%20Control/Success_vurww5.jpg)'}">
     <div class="column-content">
       <h3 class="title mb-5 chat">
-        Впевненість
+        {{ 'HOME_CONFIDENCE_COLUMN' | translate }}
       </h3>
       <p class="description" style="color: #ffffff;">
-        Будьте впевненими у своїх співробітниках та робочих планах проектів
+        {{ 'HOME_CONFIDENCE_DESCRIPTION' | translate }}
       </p>
     </div>
   </div>
@@ -36,8 +36,8 @@
   <footer class="page-footer font-small blue">
 
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3" style="color: honeydew;  background-color: #1a1a1a;">© 2020 Copyright:
-      <a href="https://revisory-control.azurewebsites.net"> Revisory Control</a>
+    <div class="footer-copyright text-center py-3" style="color: honeydew;  background-color: #1a1a1a;">© 2022 Copyright:
+      <a href="https://sem-eu-west.azurewebsites.net"> Smart Employee Management</a>
     </div>
 
   </footer>

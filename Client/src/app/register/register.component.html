@@ -1,29 +1,28 @@
 <form #registerForm="ngForm" (ngSubmit)="register()" class="needs-validation mt-3 mb-3 ml-3 mr-3" novalidate>
-  <h2 class="text-center text-primary">Реєстрація</h2>
+  <h2 class="text-center text-primary">{{ 'REGISTER_TITLE' | translate }}</h2>
   <hr>
 
   <div class="form-group">
-    <input type="text" class="form-control" required name="email" [(ngModel)]="model.email" placeholder="E-mail">
+    <input type="text" class="form-control" required name="email" [(ngModel)]="model.email"
+      placeholder="{{ 'REGISTER_EMAIL_PLACEHOLDER' | translate }}">
   </div>
 
   <div class="form-group">
-    <input type="password" class="form-control" required minlength="6" name="password" [(ngModel)]="model.password" placeholder="Пароль" aria-describedby="passHelp">
-    <small id="passHelp" class="form-text text-muted">Нікому не повідомляйте свій пароль, навіть нашому персоналу</small>
+    <input type="password" class="form-control" required minlength="6" name="password" [(ngModel)]="model.password"
+      placeholder="{{ 'REGISTER_PASSWORD_PLACEHOLDER' | translate }}" aria-describedby="passHelp">
+    <small id="passHelp" class="form-text text-muted">{{ 'REGISTER_PASSWORD_HINT' | translate }}</small>
   </div>
 
   <div class="form-group">
-    <input type="text" class="form-control" required name="firstname" [(ngModel)]="model.firstname" placeholder="Ім'я">
+    <input type="text" class="form-control" required name="firstname" [(ngModel)]="model.firstname" placeholder="{{ 'REGISTER_FIRST_NAME_PLACEHOLDER' | translate }}">
   </div>
 
   <div class="form-group">
-    <input type="text" class="form-control" required name="lastname" [(ngModel)]="model.lastname" placeholder="Прізвище">
+    <input type="text" class="form-control" required name="lastname" [(ngModel)]="model.lastname" placeholder="{{ 'REGISTER_LAST_NAME_PLACEHOLDER' | translate }}">
   </div>
 
   <div class="form-group text-center">
-    <button [disabled]="registerForm.invalid" class="btn btn-success submitBtn" type="submit">Зареєструватися</button>
-    <button class="btn btn-default" type="button" (click)="bsModalRef.hide()">Відмінити</button>
+    <button [disabled]="registerForm.invalid" class="btn btn-success submitBtn" type="submit">{{ 'REGISTER_SIGN_UP_BTN' | translate }}</button>
+    <button class="btn btn-default" type="button" (click)="bsModalRef.hide()">{{ 'REGISTER_CANCEL_BTN' | translate }}</button>
   </div>
-
-
-
 </form>

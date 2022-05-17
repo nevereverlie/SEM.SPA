@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RegisterComponent } from '../register/register.component';
 import { AlertifyService } from '../_services/alertify.service';
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit {
     private alertify: AlertifyService,
     private router: Router,
     private modalService: BsModalService,
-    private userService: UserService
+    private userService: UserService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class HeaderComponent implements OnInit {
   login() {
     this.authService.login(this.model).subscribe(
       (next) => {
-        this.alertify.success('Вхід успішний!');
+        this.alertify.success(this.translateService.instant('ALERT_LOGIN_SUCCESS'));
         this.getUser();
       },
       (e) => {
@@ -54,9 +56,15 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  selectLanguage(lang: string) {
+    this.translateService.setDefaultLang(lang);
+    this.translateService.use(lang);
+    localStorage.setItem("language", lang);
+  }
+
   logout() {
     localStorage.removeItem('token');
-    this.alertify.message('Вихід з системи');
+    this.alertify.message(this.translateService.instant('ALERT_LOGOUT'));
     this.router.navigate(['']);
   }
 

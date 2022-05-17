@@ -1,4 +1,5 @@
-.dropdown-toggle, .dropdown-item {
+.dropdown-toggle,
+.dropdown-item {
   cursor: pointer;
 }
 
@@ -6,6 +7,7 @@
   font-family: 'Raleway', sans-serif;
   font-size: xx-large;
 }
+
 .nav-link {
   font-family: 'Raleway', sans-serif;
   font-size: large;
@@ -15,7 +17,8 @@
   display: contents;
 }
 
-.col, .column{
+.col,
+.column {
   background-color: gray;
   background-repeat: no-repeat;
   background-size: cover;
@@ -40,4 +43,22 @@
   font-size: x-large;
   font-family: 'Raleway', sans-serif;
   font-weight: 400;
+}
+
+.lang-selector {
+  display: flex;
+  width: 10rem;
+  max-width: 250px;
+  height: 2rem;
+  justify-content: space-evenly;
+  margin-left: 3rem;
+}
+.lang-selector > img {
+  cursor: pointer;
+}
+
+.lang-separator {
+  color: white;
+  font-size: xx-large;
+  padding-top: 0.5vh;
 }

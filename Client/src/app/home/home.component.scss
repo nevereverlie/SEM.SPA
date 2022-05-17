@@ -1,5 +1,14 @@
-.dropdown-toggle, .dropdown-item {
+.dropdown-toggle,
+.dropdown-item {
   cursor: pointer;
+}
+
+.content {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+  zoom: 1.75;
 }
 
 .nav-link {
@@ -10,7 +19,8 @@
   display: contents;
 }
 
-.col, .column{
+.col,
+.column {
   background-color: gray;
   background-repeat: no-repeat;
   background-size: cover;
@@ -25,9 +35,13 @@
 .column-content {
   margin-top: 250px;
 }
-.title, .description {
+
+.title,
+.description {
   color: whitesmoke;
+  line-height: 1.5;
 }
+
 .description {
   font-size: 18px;
   font-weight: 800;
@@ -39,16 +53,16 @@
   font-size: 32px;
   text-shadow: 0 0 10px #00F9FF;
 }
+
 .films {
   font-size: 32px;
   text-shadow: 0 0 10px #ff1a1a;
 }
+
 .marketplace {
   font-size: 32px;
   text-shadow: 0 0 10px #15a90d;
 }
-
-
 
 
 footer {

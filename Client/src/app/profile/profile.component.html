@@ -1,67 +1,38 @@
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Профіль">
+  <mat-tab label="{{ 'PROFILE_LABEL' | translate }}">
     <!-- Profile form -->
-    <form
-      #profileForm="ngForm"
-      (ngSubmit)="updateProfile(user)"
-      class="needs-validation profileForm mt-5"
-      novalidate
-    >
+    <form #profileForm="ngForm" (ngSubmit)="updateProfile(user)" class="needs-validation profileForm mt-5" novalidate>
       <h2 class="mt-3 title">
-        Ваш профіль
-        <fa-icon
-          [icon]="faEdit"
-          style="cursor: pointer; padding-left: 1rem"
-          (click)="changeEditMode(!editMode)"
-        ></fa-icon>
+        {{ 'PROFILE_TITLE' | translate }}
+        <fa-icon [icon]="faEdit" style="cursor: pointer; padding-left: 1rem" (click)="changeEditMode(!editMode)">
+        </fa-icon>
       </h2>
 
       <div class="form-group">
-        <label for="firstname">Ім'я: </label>
+        <label for="firstname">{{ 'PROFILE_FIRST_NAME' | translate }}:</label>
         <label id="firstname" class="user__label" *ngIf="!editMode">{{
           user?.firstname
-        }}</label>
-        <input
-          type="text"
-          class="form-control user__input"
-          id="firstname"
-          name="firstname"
-          [(ngModel)]="user.firstname"
-          *ngIf="editMode"
-          value="{{ user?.firstname }}"
-        />
+          }}</label>
+        <input type="text" class="form-control user__input" id="firstname" name="firstname" [(ngModel)]="user.firstname"
+          *ngIf="editMode" value="{{ user?.firstname }}" />
       </div>
 
       <div class="form-group">
-        <label for="lastname">Прізвище: </label>
+        <label for="lastname">{{ 'PROFILE_LAST_NAME' | translate }}:</label>
         <label id="lastname" class="user__label" *ngIf="!editMode">{{
           user?.lastname
-        }}</label>
-        <input
-          type="text"
-          class="form-control user__input"
-          id="lastname"
-          *ngIf="editMode"
-          name="lastname"
-          [(ngModel)]="user.lastname"
-          value="{{ user?.lastname }}"
-        />
+          }}</label>
+        <input type="text" class="form-control user__input" id="lastname" *ngIf="editMode" name="lastname"
+          [(ngModel)]="user.lastname" value="{{ user?.lastname }}" />
       </div>
 
       <div class="form-group">
-        <label for="email">E-mail: </label>
+        <label for="email">{{ 'PROFILE_EMAIL' | translate }}:</label>
         <label id="email" class="user__label" *ngIf="!editMode">{{
           user?.userEmail
-        }}</label>
-        <input
-          type="email"
-          class="form-control user__input"
-          id="email"
-          *ngIf="editMode"
-          name="email"
-          [(ngModel)]="user.userEmail"
-          value="{{ user?.userEmail }}"
-        />
+          }}</label>
+        <input type="email" class="form-control user__input" id="email" *ngIf="editMode" name="email"
+          [(ngModel)]="user.userEmail" value="{{ user?.userEmail }}" />
       </div>
 
       <!--<div class="form-group">
@@ -80,143 +51,94 @@
       </div>-->
 
       <div class="form-group">
-        <label for="department">Відділ: </label>
+        <label for="department">{{ 'PROFILE_DEPARTMENT' | translate }}:</label>
         <mat-label id="department" class="user__label" *ngIf="!editMode">{{
           user?.department?.departmentName || user.department
-        }}</mat-label>
-        <mat-select
-          class="form-control user__input"
-          *ngIf="editMode"
-          [(ngModel)]="user.department"
-          name="department"
-        >
-          <mat-option
-            *ngFor="let department of departments"
-            [value]="department?.departmentName"
-          >
+          }}</mat-label>
+        <mat-select class="form-control user__input" *ngIf="editMode" [(ngModel)]="user.department" name="department">
+          <mat-option *ngFor="let department of departments" [value]="department?.departmentName">
             {{ department?.departmentName }}
           </mat-option>
         </mat-select>
       </div>
 
-      <div class="form-group text-center">
-        <button
-          *ngIf="editMode"
-          class="btn btn-success profileBtn"
-          type="submit"
-          (click)="updateProfile(user)"
-        >
-          Зберегти
+      <div class="form-group text-center mt-3">
+        <button *ngIf="editMode" class="btn btn-success profileBtn" type="submit" (click)="updateProfile(user)">
+          {{ 'PROFILE_SAVE_CHANGES_BTN' | translate }}
         </button>
-        <button
-          *ngIf="editMode"
-          class="btn btn-secondary"
-          type="button"
-          (click)="changeEditMode(false)"
-        >
-          Відмінити
+        <button *ngIf="editMode" class="btn btn-secondary" type="button" (click)="changeEditMode(false)">
+          {{ 'PROFILE_CANCEL_BTN' | translate }}
         </button>
       </div>
     </form>
   </mat-tab>
-  <mat-tab label="Співробітники">
+  <mat-tab label="{{ 'PROFILE_LABEL_EMPLOYEES' | translate }}">
     <!-- Employees list -->
     <mat-selection-list #employees [multiple]="false">
-      <mat-list-option
-        class="list-option"
-        *ngFor="let employee of employeesList"
-        [value]="employee"
-        (click)="selectEmployee(employee); drawChart(employee)"
-      >
-        <div id="{{ employee.lastname }}" *ngIf="employee.lastname != 'admin'">
+      <mat-list-option class="list-option" *ngFor="let employee of employeesList" [value]="employee"
+        (click)="selectEmployee(employee); drawChart(employee)">
+        <div id="{{ employee.lastname }}">
           <fa-icon [icon]="faUser" size="3x" class="userIcon"></fa-icon>
           <div class="employeeInfo">
-            <span style="font-weight: 600"
-              >{{ employee.firstname }} {{ employee.lastname }}</span
-            >
+            <span style="font-weight: 600">{{ employee.firstname }} {{ employee.lastname }}</span>
             <br />
-            <span>E-mail: {{ employee.userEmail }} </span
-            ><br />
-            <span *ngIf="employee.department != null"
-              >Відділ: {{ employee.department.departmentName }} </span
-            ><br />
-            <span *ngIf="employee.department == null"
-              >Відділ: не закріплений</span
-            ><br />
+            <span>{{ 'PROFILE_EMPLOYEE_EMAIL' | translate }}: {{ employee.userEmail }} </span><br />
+            <span *ngIf="employee.department != null">{{ 'PROFILE_EMPLOYEE_DEPARTMENT' | translate }}: {{
+              employee.department.departmentName }} </span><br />
+            <span *ngIf="employee.department == null">{{ 'PROFILE_EMPLOYEE_DEPARTMENT_EMPTY' | translate }}</span><br />
           </div>
         </div>
       </mat-list-option>
     </mat-selection-list>
     <!-- Graphics -->
-    <div class="employeeUnselected" *ngIf="selectedEmployee == null">Оберіть співробітника зі списку для відображення графіку продуктивності</div>
+    <div class="employeeUnselected" *ngIf="selectedEmployee == null">{{ 'PROFILE_EMPLOYEE_UNSELECTED_MESSAGE' |
+      translate }}</div>
     <div id="chartContainer" class="chartContainer"></div>
   </mat-tab>
-  <mat-tab
-    *ngIf="this.user.firstname == 'admin'"
-    label="Панель адміністратора"
-    style="overflow: hidden"
-  >
+  <mat-tab *ngIf="this.user.firstname == 'admin'" label="{{ 'PROFILE_LABEL_ADMINISTRATION' | translate }}"
+    style="overflow: hidden">
     <ngb-accordion [closeOthers]="true">
-      <ngb-panel id="departments-1" title="Відділи" style="font-size: x-large;">
+      <ngb-panel id="departments-1" title="{{ 'PROFILE_ADMINISTRATION_DEPARTMENTS_PANEL_TITLE' | translate }}"
+        style="font-size: x-large;">
         <ng-template ngbPanelContent>
           <!-- Departments table -->
-          <table class="table admin-table table-striped table-hover">
+          <table class="table admin-table table-striped table-hover" style="width: 50%; margin: auto;">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">
-                  Відділ
+                  {{ 'PROFILE_ADMINISTRATION_DEPARTMENTS_COLUMN' | translate }}
                   <div class="lockIcon">
-                    <fa-icon
-                      [icon]="faLock"
-                      *ngIf="!updateMode"
-                      aria-hidden="true"
-                      style="padding-left: 1rem"
-                    ></fa-icon>
-                    <fa-icon
-                      [icon]="faUnlock"
-                      *ngIf="updateMode"
-                      aria-hidden="true"
-                      style="padding-left: 1rem"
-                    ></fa-icon>
+                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem">
+                    </fa-icon>
+                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem">
+                    </fa-icon>
                   </div>
                 </th>
+                <th scope="col">X</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let department of departments">
                 <th scope="row">{{ department.departmentId }}</th>
-                <td style="width: 100%">
+                <td>
                   <div class="form-group">
                     <div *ngIf="!updateMode; then viewMode; else updatingMode"></div>
-                    <ng-template #viewMode
-                      ><input
-                        name="depInput"
-                        placeholder="{{ department.departmentName }}"
+                    <ng-template #viewMode><input name="depInput" placeholder="{{ department.departmentName }}"
                         disabled />
-                      <div class="timesIcon">
-                        <fa-icon
-                          [icon]="faTimes"
-                          style="font-size: 36px; color: red; cursor: pointer"
-                          (click)="
-                            deleteDepartmentConfirmation(department.departmentId)
-                          "
-                        ></fa-icon></div
-                    ></ng-template>
-                    <ng-template #updatingMode
-                      ><input
-                        class="departmentNameInput updateInput"
-                        name="depInput"
+                    </ng-template>
+                    <ng-template #updatingMode><input class="departmentNameInput updateInput" name="depInput"
                         placeholder="{{ department.departmentName }}" />
-                      <div class="timesIcon">
-                        <fa-icon
-                          [icon]="faTimes"
-                          style="font-size: 36px; color: red; cursor: pointer"
-                          (click)="
-                            deleteDepartmentConfirmation(department.departmentId)
-                          "
-                        ></fa-icon></div
-                    ></ng-template>
+                    </ng-template>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <div class="timesIcon">
+                      <fa-icon [icon]="faTimes" style="font-size: 36px; color: red; cursor: pointer" (click)="
+                          deleteDepartmentConfirmation(department.departmentId)
+                        "></fa-icon>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -224,58 +146,37 @@
           </table>
           <div class="container">
             <div class="row">
-              <button
-                type="button"
-                class="btn btn-outline-success btn-lg"
-                (click)="openVerticallyCentered(content)"
-              >
-                Створити
+              <button type="button" class="btn btn-outline-success btn-lg" (click)="openVerticallyCentered(content)">
+                {{ 'PROFILE_ADMINISTRATION_DEPARTMENTS_CREATE_BTN' | translate }}
               </button>
               <ng-template #content let-modal>
                 <div class="modal-header">
-                  <h4 class="modal-title">Створення відділу</h4>
-                  <button
-                    type="button"
-                    class="close"
-                    aria-label="Close"
-                    (click)="modal.dismiss('Cross click')"
-                  >
+                  <h4 class="modal-title">{{ 'PROFILE_ADMINISTRATION_DEPARTMENTS_CREATION_TITLE' | translate }}</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <label>Введіть назву нового відділу: </label>
-                  <input
-                    style="margin-left: 1rem; width: auto"
-                    [(ngModel)]="departmentForCreation.departmentName"
-                  />
+                  <label>{{ 'PROFILE_ADMINISTRATION_DEPARTMENTS_CREATION_NAME_LABEL' | translate }}: </label>
+                  <input style="margin-left: 1rem; width: auto"
+                    placeholder="{{ 'PROFILE_ADMINISTRATION_DEPARTMENTS_CREATION_NAME_PLACEHOLDER' | translate }}"
+                    [(ngModel)]="departmentForCreation.departmentName" />
                 </div>
                 <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-light"
-                    (click)="modal.close('Close click')"
-                  >
-                    Close
+                  <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+                    {{ 'PROFILE_ADMINISTRATION_DEPARTMENTS_CREATION_CLOSE_BTN' | translate }}
                   </button>
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                    (click)="
+                  <button type="button" class="btn btn-success" (click)="
                       createDepartment(departmentForCreation); modal.close('Ok click')
-                    "
-                  >
-                    Створити
+                    ">
+                    {{ 'PROFILE_ADMINISTRATION_DEPARTMENTS_CREATION_CREATE_LABEL' | translate }}
                   </button>
                 </div>
               </ng-template>
-              <button
-                type="button"
-                class="btn btn-outline-primary btn-lg"
-                id="BtnUpdate"
-                (click)="changeUpdateMode(); !updateMode ? updateDepartments() : ''"
-              >
-                {{ updateMode ? "Зберегти зміни" : "Змінити" }}
+              <button type="button" class="btn btn-outline-primary btn-lg" id="BtnUpdate"
+                (click)="changeUpdateMode(); !updateMode ? updateDepartments() : ''">
+                {{ updateMode ? ('PROFILE_ADMINISTRATION_DEPARTMENTS_SAVE_CHANGES_BTN' | translate) :
+                ('PROFILE_ADMINISTRATION_DEPARTMENTS_CHANGE_BTN' | translate) }}
               </button>
               <div *ngIf="updating" class="spinner-overlay">
                 <div class="spinner-center">
@@ -286,135 +187,200 @@
           </div>
         </ng-template>
       </ngb-panel>
-      <ngb-panel id="users-2" title="Користувачі">
+      <ngb-panel id="users-2" class="usersPanel" title="{{ 'PROFILE_ADMINISTRATION_USERS_LABEL' | translate }}">
         <ng-template ngbPanelContent>
           <!-- Users table -->
-          <table class="table admin-table table-striped table-hover" style="overflow: auto; width: 90%;">
+          <table class="table admin-table table-striped table-hover" style="overflow: auto; width: 100%;">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Ім'я
+                <th scope="col">{{ 'PROFILE_ADMINISTRATION_USERS_FIRST_NAME_COLUMN' | translate }}
                   <div class="lockIcon">
-                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
-                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
+                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
                   </div>
                 </th>
-                <th scope="col">Прізвище
+                <th scope="col">{{ 'PROFILE_ADMINISTRATION_USERS_LAST_NAME_COLUMN' | translate }}
                   <div class="lockIcon">
-                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
-                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
+                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
                   </div>
                 </th>
-                <th scope="col">E-mail
+                <th scope="col">{{ 'PROFILE_ADMINISTRATION_USERS_EMAIL_COLUMN' | translate }}
                   <div class="lockIcon">
-                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
-                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
+                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
                   </div>
                 </th>
-                <th scope="col">Відділ
+                <th scope="col">{{ 'PROFILE_ADMINISTRATION_USERS_DEPARTMENT_COLUMN' | translate }}
                   <div class="lockIcon">
-                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
-                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
+                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
                   </div>
                 </th>
-                <th scope="col">Пропрацьовано, год
+                <th scope="col">{{ 'PROFILE_ADMINISTRATION_USERS_WORKED_HRS_COLUMN' | translate }}
                   <div class="lockIcon">
-                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
-                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
+                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
                   </div>
                 </th>
-                <th scope="col">Розваги, год
+                <th scope="col">{{ 'PROFILE_ADMINISTRATION_USERS_WASTED_HRS_COLUMN' | translate }}
                   <div class="lockIcon">
-                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
-                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
+                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
                   </div>
                 </th>
-                <th scope="col">Пропрацьовано, хв
+                <th scope="col">{{ 'PROFILE_ADMINISTRATION_USERS_WORKED_MIN_COLUMN' | translate }}
                   <div class="lockIcon">
-                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
-                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
+                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
                   </div>
                 </th>
-                <th scope="col">Розваги, хв
+                <th scope="col">{{ 'PROFILE_ADMINISTRATION_USERS_WASTED_MIN_COLUMN' | translate }}
                   <div class="lockIcon">
-                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
-                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
+                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
                   </div>
                 </th>
+                <th scope="col">{{ 'PROFILE_ADMINISTRATION_USERS_ALLOWED_APPS' | translate }}
+                  <div class="lockIcon">
+                    <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
+                    <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;">
+                    </fa-icon>
+                  </div>
+                </th>
+                <th scope="col"> X </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let user of users">
                 <ng-container>
                   <th scope="row">{{user?.userId}}</th>
-                  <td style="width: 100%;">
+                  <td>
                     <div class="form-group">
                       <div *ngIf="!updateMode; then viewMode0 else updateMode0"></div>
-                        <ng-template #viewMode0>
-                          <input class="firstnameInput" name="firstnameInput" placeholder="{{user?.firstname}}" disabled>
-                        </ng-template>
-                        <ng-template #updateMode0>
-                          <input class="firstnameInput updateInput" name="firstnameInput" placeholder="{{user?.firstname}}">
-                        </ng-template>
+                      <ng-template #viewMode0>
+                        <input class="firstnameInput" name="firstnameInput" placeholder="{{user?.firstname}}" disabled>
+                      </ng-template>
+                      <ng-template #updateMode0>
+                        <input class="firstnameInput updateInput" name="firstnameInput"
+                          placeholder="{{user?.firstname}}">
+                      </ng-template>
                     </div>
                   </td>
-                  <td style="width: 100%;">
+                  <td>
                     <div class="form-group">
                       <div *ngIf="!updateMode; then viewMode1 else updateMode1"></div>
-                        <ng-template #viewMode1><input class="lastnameInput" name="lastnameInput" placeholder="{{user?.lastname}}" disabled></ng-template>
-                        <ng-template #updateMode1><input class="lastnameInput updateInput" name="lastnameInput" placeholder="{{user?.lastname}}"></ng-template>
+                      <ng-template #viewMode1><input class="lastnameInput" name="lastnameInput"
+                          placeholder="{{user?.lastname}}" disabled></ng-template>
+                      <ng-template #updateMode1><input class="lastnameInput updateInput" name="lastnameInput"
+                          placeholder="{{user?.lastname}}"></ng-template>
                     </div>
                   </td>
-                  <td style="width: 100%;">
+                  <td>
                     <div class="form-group">
                       <div *ngIf="!updateMode; then viewMode2 else updateMode2"></div>
-                        <ng-template #viewMode2><input class="emailInput" name="emailInput" placeholder="{{user?.userEmail}}" disabled></ng-template>
-                        <ng-template #updateMode2><input class="emailInput updateInput" name="emailInput" placeholder="{{user?.userEmail}}"></ng-template>
+                      <ng-template #viewMode2><input class="emailInput" name="emailInput"
+                          placeholder="{{user?.userEmail}}" disabled></ng-template>
+                      <ng-template #updateMode2><input class="emailInput updateInput" name="emailInput"
+                          placeholder="{{user?.userEmail}}"></ng-template>
                     </div>
                   </td>
-                  <td style="width: 100%;">
+                  <td>
                     <div class="form-group">
                       <div *ngIf="!updateMode; then viewMode3 else updateMode3"></div>
-                        <ng-template #viewMode3><input class="departmentInput" name="departmentInput" placeholder="{{user?.department?.departmentName}}" disabled></ng-template>
-                        <ng-template #updateMode3><input class="departmentInput updateInput" name="departmentInput" placeholder="{{user?.department?.departmentName}}"></ng-template>
+                      <ng-template #viewMode3><input class="departmentInput" name="departmentInput"
+                          placeholder="{{user?.department?.departmentName}}" disabled></ng-template>
+                      <ng-template #updateMode3><input class="departmentInput updateInput" name="departmentInput"
+                          placeholder="{{user?.department?.departmentName}}"></ng-template>
                     </div>
                   </td>
-                  <td style="width: 100%;">
+                  <td>
                     <div class="form-group">
                       <div *ngIf="!updateMode; then viewMode4 else updateMode4"></div>
-                        <ng-template #viewMode4><input class="workedHoursInput" name="workedHoursInput" placeholder="{{user?.workedHours}}" disabled></ng-template>
-                        <ng-template #updateMode4><input class="workedHoursInput updateInput" name="workedHoursInput" placeholder="{{user?.workedHours}}"></ng-template>
+                      <ng-template #viewMode4><input class="workedHoursInput" name="workedHoursInput"
+                          placeholder="{{user?.workedHours}}" disabled></ng-template>
+                      <ng-template #updateMode4><input class="workedHoursInput updateInput" name="workedHoursInput"
+                          placeholder="{{user?.workedHours}}"></ng-template>
                     </div>
                   </td>
-                  <td style="width: 100%;">
+                  <td>
                     <div class="form-group">
                       <div *ngIf="!updateMode; then viewMode5 else updateMode5"></div>
-                        <ng-template #viewMode5><input class="wastedHoursInput" name="wastedHoursInput" placeholder="{{user?.wastedHours}}" disabled></ng-template>
-                        <ng-template #updateMode5><input class="wastedHoursInput updateInput" name="wastedHoursInput" placeholder="{{user?.wastedHours}}"></ng-template>
+                      <ng-template #viewMode5><input class="wastedHoursInput" name="wastedHoursInput"
+                          placeholder="{{user?.wastedHours}}" disabled></ng-template>
+                      <ng-template #updateMode5><input class="wastedHoursInput updateInput" name="wastedHoursInput"
+                          placeholder="{{user?.wastedHours}}"></ng-template>
                     </div>
                   </td>
-                  <td style="width: 100%;">
+                  <td>
                     <div class="form-group">
                       <div *ngIf="!updateMode; then viewMode6 else updateMode6"></div>
-                        <ng-template #viewMode6><input class="workedMinutesInput" name="workedMinutesInput" placeholder="{{user?.workedMinutes}}" disabled></ng-template>
-                        <ng-template #updateMode6><input class="workedMinutesInput updateInput" name="workedMinutesInput" placeholder="{{user?.workedMinutes}}"></ng-template>
+                      <ng-template #viewMode6><input class="workedMinutesInput" name="workedMinutesInput"
+                          placeholder="{{user?.workedMinutes}}" disabled></ng-template>
+                      <ng-template #updateMode6><input class="workedMinutesInput updateInput" name="workedMinutesInput"
+                          placeholder="{{user?.workedMinutes}}"></ng-template>
                     </div>
                   </td>
-                  <td style="width: 100%;">
+                  <td>
                     <div class="form-group">
                       <div *ngIf="!updateMode; then viewMode7 else updateMode7"></div>
-                        <ng-template #viewMode7>
-                          <input class="wastedMinutesInput" name="wastedMinutesInput" placeholder="{{user?.wastedMinutes}}" disabled>
-                          <div class="timesIcon">
-                            <fa-icon [icon]="faTimes" style="font-size: 36px; color: red; cursor: pointer" (click)="deleteUserConfirmation(user.userId)"></fa-icon>
-                          </div>
-                        </ng-template>
-                        <ng-template #updateMode7>
-                          <input class="wastedMinutesInput updateInput" name="wastedMinutesInput" placeholder="{{user?.wastedMinutes}}">
-                          <div class="timesIcon">
-                            <fa-icon [icon]="faTimes" style="font-size: 36px; color: red; cursor: pointer" (click)="deleteUserConfirmation(user.userId)"></fa-icon>
-                          </div>
-                        </ng-template>
+                      <ng-template #viewMode7>
+                        <input class="wastedMinutesInput" name="wastedMinutesInput"
+                          placeholder="{{user?.wastedMinutes}}" disabled>
+                      </ng-template>
+                      <ng-template #updateMode7>
+                        <input class="wastedMinutesInput updateInput" name="wastedMinutesInput"
+                          placeholder="{{user?.wastedMinutes}}">
+                      </ng-template>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <div *ngIf="!updateMode; then viewMode8 else updateMode8"></div>
+                      <ng-template #viewMode8>
+                        <ng-multiselect-dropdown
+                          [placeholder]=""
+                          [settings]="dropdownSettings"
+                          [data]="appsList"
+                          [(ngModel)]="user.allowedApps"
+                          [disabled]="true">
+                        </ng-multiselect-dropdown>
+                      </ng-template>
+                      <ng-template #updateMode8>
+                        <ng-multiselect-dropdown
+                          [placeholder]=""
+                          [settings]="dropdownSettings"
+                          [data]="appsList"
+                          [(ngModel)]="user.allowedApps"
+                          (onSelect)="onItemSelect($event)">
+                        </ng-multiselect-dropdown>
+                      </ng-template>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <div class="timesIcon">
+                        <fa-icon [icon]="faTimes" style="font-size: 36px; color: red; cursor: pointer"
+                          (click)="deleteUserConfirmation(user.userId)"></fa-icon>
+                      </div>
                     </div>
                   </td>
                 </ng-container>
@@ -423,7 +389,10 @@
           </table>
           <div class="container">
             <div class="row">
-              <button type="button" class="btn btn-outline-primary btn-lg" id="BtnUpdate" (click)="changeUpdateMode(); !updateMode ? updateUsers() : ''">{{updateMode ? 'Зберегти' : 'Змінити'}}</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" id="BtnUpdate"
+                (click)="changeUpdateMode(); !updateMode ? updateUsers() : ''">
+                {{ updateMode ? ('PROFILE_ADMINISTRATION_USERS_SAVE_CHANGES_BTN' | translate) :
+                                ('PROFILE_ADMINISTRATION_USERS_CHANGE_BTN' | translate) }}</button>
               <div *ngIf="updating" class="spinner-overlay">
                 <div class="spinner-center">
                   <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
