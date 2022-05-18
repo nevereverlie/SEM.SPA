@@ -18,9 +18,9 @@ export class AppComponent implements OnInit {
         this.translateService.setDefaultLang(localStorage.getItem('language'));
         this.translateService.use(localStorage.getItem('language'));
       } else {
-        this.translateService.setDefaultLang('en');
-        this.translateService.use('en');
-        localStorage.setItem("language","en");
+        this.translateService.setDefaultLang('en-US');
+        this.translateService.use('en-US');
+        localStorage.setItem("language","en-US");
       }
   }
 
